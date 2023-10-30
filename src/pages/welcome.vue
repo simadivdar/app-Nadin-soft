@@ -1,4 +1,10 @@
-<script setup lang="ts"></script>
+<script lang="ts">
+import { defineComponent } from "vue";
+export default defineComponent({
+  name: "Welcome",
+
+});
+</script>
 
 <template>
   <div class="d-flex flex-column text-center mt-5">

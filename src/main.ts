@@ -1,15 +1,21 @@
 import { createApp } from "vue";
 import "./style.css";
 import App from "./App.vue";
-import "bootstrap/dist/js/bootstrap.bundle.js";
+import "bootstrap/dist/js/bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { createRouter, createWebHistory } from "vue-router";
-import Welcome from "./pages/welcome.vue";
-import  NotFound from "./components/notFound.vue";
+import { RouteRecordRaw } from "vue-router";
 
-const routes = [
-  { path: "/", name: "Welcome-", component: Welcome },
-  { path: "/:pathMatch(.*)*", name: " NotFound-", component: NotFound },
+
+const routes: Array<RouteRecordRaw> = [
+  { path: "/", name: "Welcome", component:() => import("./pages/Welcome.vue") },
+  { path: "/app", name: "Bar", component:() => import("./pages/Bar.vue") , children: [
+    {
+      path: "",
+      name: "Dashboard",
+      component: () => import("./pages/Dashboard.vue")
+    }]},
+  { path: "/:pathMatch(.*)*", name: " NotFound", component: () => import("./components/notFound.vue")},
 ];
 const router = createRouter({
   history: createWebHistory(),
