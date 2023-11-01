@@ -20,7 +20,7 @@ export default defineComponent({
       try {
         error.value = false;
         getInformation.value = true;
-
+        city_name.value=city_name.value.charAt(0).toUpperCase() + city_name.value.slice(1);
         const response = await fetch(
           `http://localhost:3000/cities?city=${city_name.value}`
         );

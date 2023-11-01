@@ -1,7 +1,17 @@
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent,ref } from "vue";
 export default defineComponent({
   name: "Profile",
+  setup(){
+    const newUser=ref("")
+    const addName=()=>{
+        localStorage.removeItem("userName");
+    }
+    return{
+        newUser,
+        addName
+    }
+  }
 });
 </script>
 
@@ -11,6 +21,7 @@ export default defineComponent({
       <input
         class="form-control text-center"
         type="text"
+        v-model="newUser"
         placeholder="Name"
         aria-label="default input name"
       />
@@ -42,7 +53,7 @@ export default defineComponent({
           <li><a class="dropdown-item" href="#">EN</a></li>
         </ul>
       </div>
-      <button class="btn border mt-2 col-8">Save</button>
+      <button class="btn border mt-2 col-8" @click="addName">Save</button>
     </div>
   </div>
 </template>

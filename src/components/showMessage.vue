@@ -1,24 +1,33 @@
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent,ref,onMounted} from "vue";
 
 export default defineComponent({
   props: {
     time: Number ,
   },
   setup(props) {
-
-
+    const userName=ref("")
     const timeMessage = computed(() => {
       if (props.time != undefined){
       if (props.time >= 21 || props.time < 3) {
-        return "سیما شب بخیر";
+        return `Good night,${userName.value}`;
       }
       else if (props.time>= 3 && props.time < 11) {
-        return "صبح بخیر سیما...";
+        return `Good morning,${userName.value}`;
       } else {
-        return " سیما...ظهر بخیر";
+        return `Good afternoon,${userName.value}`;
       }
     }
+    });
+    const loadUser = () => {
+      const savedUser = localStorage.getItem("userName");
+      if (savedUser) {
+        userName.value = JSON.parse(savedUser);
+      }
+    };
+
+    onMounted(() => {
+      loadUser();
     });
 
     return {
