@@ -14,6 +14,10 @@ const routes: Array<RouteRecordRaw> = [
       path: "",
       name: "Dashboard",
       component: () => import("./pages/Dashboard.vue")
+    }, {
+      path: "/Todo",
+      name: "Todo",
+      component: () => import("./pages/Todo.vue")
     }]},
   { path: "/:pathMatch(.*)*", name: " NotFound", component: () => import("./components/notFound.vue")},
 ];
