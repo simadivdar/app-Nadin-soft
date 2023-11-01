@@ -6,22 +6,22 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="d-flex flex-column mt-5">
-    <div class="row ">
+  <div class="d-flex justify-content-center m-auto">
+    <div class="col-4">
       <input
-        class="form-control"
+        class="form-control text-center"
         type="text"
-        placeholder="My name is..."
+        placeholder="Name"
         aria-label="default input name"
       />
       <div class="dropdown mt-2">
         <button
-          class="btn border dropdown-toggle"
+          class="btn border dropdown-toggle col-12"
           type="button"
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          Teme
+          Theme
         </button>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="#">Light</a></li>
@@ -30,7 +30,7 @@ export default defineComponent({
       </div>
       <div class="dropdown mt-2">
         <button
-          class="btn border dropdown-toggle"
+          class="btn border dropdown-toggle col-12"
           type="button"
           data-bs-toggle="dropdown"
           aria-expanded="false"
@@ -42,7 +42,7 @@ export default defineComponent({
           <li><a class="dropdown-item" href="#">EN</a></li>
         </ul>
       </div>
-      <button class="btn border mt-2">Save</button>
+      <button class="btn border mt-2 col-8">Save</button>
     </div>
   </div>
 </template>

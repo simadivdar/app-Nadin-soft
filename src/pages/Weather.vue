@@ -3,7 +3,7 @@ import { defineComponent, ref } from "vue";
 interface WeatherData {
   current_temperature: number;
   current_weather: string;
-  weather_units:string;
+  weather_units: string;
 }
 export default defineComponent({
   name: "Weather",
@@ -18,9 +18,9 @@ export default defineComponent({
     const longitude = ref();
     const getCity = async () => {
       try {
-        error.value=false;
-        getInformation.value=true;
-       
+        error.value = false;
+        getInformation.value = true;
+
         const response = await fetch(
           `http://localhost:3000/cities?city=${city_name.value}`
         );
@@ -31,7 +31,7 @@ export default defineComponent({
         getWeather();
         loading.value = false;
       } catch (e) {
-        errorMessage.value="Not Found City..."
+        errorMessage.value = "Not Found City...";
         error.value = true;
         loading.value = false;
       }
@@ -46,11 +46,11 @@ export default defineComponent({
         weatherData.value = {
           current_temperature: data.current_weather.temperature,
           current_weather: data.current_weather.weathercode,
-          weather_units:data.current_weather_units.temperature
+          weather_units: data.current_weather_units.temperature,
         };
         loading.value = false;
       } catch (e) {
-        errorMessage.value="Try again.."
+        errorMessage.value = "Try again..";
         error.value = true;
         loading.value = false;
       }
@@ -71,24 +71,28 @@ export default defineComponent({
 
 <template>
   <div class="mt-5">
-    <input
-      class="form-control"
-      type="text"
-      v-model="city_name"
-      @keyup.enter="getCity"
-      placeholder="Enter city .."
-      aria-label="default input name"
-    />
-    <div class="d-flex justify-content-center">
+    <div class="col-4">
+      <input
+        class="form-control text-center"
+        type="text"
+        v-model="city_name"
+        @keyup.enter="getCity"
+        placeholder="Enter city "
+        aria-label="default input name"
+      />
+    </div>
+    <div class="d-flex justify-content-center text-center m-auto col-8">
       <div v-if="loading && getInformation">loading...</div>
-      <div v-else-if="error">{{  errorMessage }}</div>
+      <div v-else-if="error">{{ errorMessage }}</div>
       <div
         v-else
         class="mt-5 h-25 w-50 border d-flex flex-column justify-content-center"
       >
-        <p>{{ city_name }}</p>
-        <p>{{ weatherData?.current_temperature }}{{ weatherData?.weather_units}}</p>
-        <p>{{ weatherData?.current_weather }}</p>
+        <p class="mt-2">{{ city_name }}</p>
+        <p>
+          {{ weatherData?.current_temperature }}{{ weatherData?.weather_units }}
+        </p>
+        <p class="mb-4">{{ weatherData?.current_weather }}</p>
       </div>
     </div>
   </div>

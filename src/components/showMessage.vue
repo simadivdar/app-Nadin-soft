@@ -28,7 +28,7 @@ export default defineComponent({
 });
 </script>
 <template>
-  <div class="col-12 pt-5">
-    <h2>{{ timeMessage }}</h2>
+  <div class="pt-5">
+    <h3 class="text-center">{{ timeMessage }}</h3>
   </div>
 </template>

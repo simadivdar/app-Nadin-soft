@@ -10,10 +10,12 @@ export default defineComponent({
       editing: boolean;
     };
     const tasks = ref<Task[]>([]);
-    const show=ref(false)
+    const show = ref(false);
+    const empty=ref(false)
     const newTaskTitle = ref("");
 
     const addTask = () => {
+      if(newTaskTitle.value){
       const newTask: Task = {
         id: tasks.value.length + 1,
         title: newTaskTitle.value,
@@ -22,6 +24,10 @@ export default defineComponent({
       tasks.value.push(newTask);
       newTaskTitle.value = "";
       saveTasks();
+    }
+    else{
+      empty.value=true;
+    }
     };
 
     const removeTask = (taskId: number) => {
@@ -48,6 +54,7 @@ export default defineComponent({
       tasks,
       newTaskTitle,
       show,
+      empty,
       addTask,
       removeTask,
       saveTasks,
@@ -57,9 +64,9 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="container">
-    <h1>لیست کارهای روزانه</h1>
+  <div class="mt-5 m-auto col-10">
     <ul class="list-group">
+      <li class="list-group-item text-center"><h3>Todo List</h3></li>
       <li v-for="task in tasks" :key="task.id" class="list-group-item">
         <div class="form-check d-flex justify-content-between">
           <div>
@@ -90,9 +97,17 @@ export default defineComponent({
         </div>
       </li>
     </ul>
-    <div class="mt-3">
-      <input v-if="show" type="text" class="form-control" @keyup.enter="addTask" v-model="newTaskTitle" required/>
-      <button class="btn" @click="show=!show">+</button>
+    <div class="mt-3 d-flex justify-content-center">
+      <input
+        v-if="show"
+        type="text"
+        class="form-control"
+        @keyup.enter="addTask"
+        v-model="newTaskTitle"
+        required
+      />
+      <p v-if="empty" class="text-danger">Please provide a valid task</p>
+      <button class="btn" @click="show = !show">+</button>
     </div>
   </div>
 </template>
