@@ -27,7 +27,7 @@ export default defineComponent({
         </li>
         <li class="nav-item">
           <router-link
-            to=" "
+          :to="{ name: 'Weather' }"
             class="nav-link text-dark "
             data-toggle="pill"
             >Weather</router-link
