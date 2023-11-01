@@ -22,6 +22,10 @@ const routes: Array<RouteRecordRaw> = [
       path: "/Weather",
       name: "Weather",
       component: () => import("./pages/Weather.vue")
+    },{
+      path: "/Profile",
+      name: "Profile",
+      component: () => import("./pages/Profile.vue")
     }]},
   { path: "/:pathMatch(.*)*", name: " NotFound", component: () => import("./components/notFound.vue")},
 ];

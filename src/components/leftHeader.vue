@@ -2,40 +2,36 @@
 import { defineComponent } from "vue";
 export default defineComponent({
   name: "LeftHeader",
-
 });
 </script>
 <template>
   <div class="container-fluid p-0">
-    <div class="border h-100 container-fluid ">
+    <div class="border h-100 container-fluid">
       <ul class="nav flex-column nav-pills">
         <li class="nav-item">
-          <router-link
-            to="/app"
-            class="nav-link text-dark "
-            data-toggle="pill"
+          <router-link to="/app" class="nav-link text-dark" data-toggle="pill"
             >Dashboard</router-link
           >
         </li>
         <li class="nav-item">
           <router-link
-          :to="{ name: 'Todo' }"
-            class="nav-link text-dark "
+            :to="{ name: 'Todo' }"
+            class="nav-link text-dark"
             data-toggle="pill"
             >Todos</router-link
           >
         </li>
         <li class="nav-item">
           <router-link
-          :to="{ name: 'Weather' }"
-            class="nav-link text-dark "
+            :to="{ name: 'Weather' }"
+            class="nav-link text-dark"
             data-toggle="pill"
             >Weather</router-link
           >
         </li>
         <li class="nav-item">
           <router-link
-            to=" "
+            :to="{ name: 'Profile' }"
             class="nav-link text-dark"
             data-toggle="pill"
             >Profile</router-link
