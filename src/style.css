@@ -1,0 +1,33 @@
+:root {
+  --background-color: white !important;
+  --background-color-element:  rgba(255, 255, 255, 0.473) !important;
+  --text-color: hsl(200, 15%, 8%) !important;  
+}
+[data-theme='darkMode'] {
+  --background-color: black !important;
+  --background-color-element:  hsla(180, 6%, 7%, 0.616)!important;
+  --text-color: hsl(0, 0%, 100%) !important;   
+}
+[data-theme='pinkMode'] {
+  --background-color: pink !important;
+  --background-color-element:  rgb(228, 157, 167)!important;
+  --text-color: hsl(0, 0%, 100%) !important;   
+}
+body {
+  font-family: 'Nunito Sans', sans-serif !important;
+}
+.weight{
+  font-weight: 600;
+
+}
+.mode{
+  color: var(--text-color);
+  background-color:var(--background-color) ;
+}
+.mode-el{
+  background-color:var(--background-color-element) ;
+}
+.mode-btn{
+  color: var(--text-color);
+  text-decoration: none;
+}

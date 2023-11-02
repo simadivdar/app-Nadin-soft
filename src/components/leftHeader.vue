@@ -8,31 +8,31 @@ export default defineComponent({
   <div class="container-fluid p-0">
     <div class="border h-100 container-fluid">
       <ul class="nav flex-column nav-pills">
-        <li class="nav-item">
-          <router-link to="/app" class="nav-link text-dark" data-toggle="pill"
+        <li class="nav-item m-auto mt-3 ">
+          <router-link to="/app" class="mode-btn" data-toggle="pill"
             >Dashboard</router-link
           >
         </li>
-        <li class="nav-item">
+        <li class="nav-item m-auto mt-3">
           <router-link
             :to="{ name: 'Todo' }"
-            class="nav-link text-dark"
+            class="mode-btn "
             data-toggle="pill"
             >Todos</router-link
           >
         </li>
-        <li class="nav-item">
+        <li class="nav-item m-auto mt-3">
           <router-link
             :to="{ name: 'Weather' }"
-            class="nav-link text-dark"
+            class="mode-btn"
             data-toggle="pill"
             >Weather</router-link
           >
         </li>
-        <li class="nav-item">
+        <li class="nav-item m-auto mt-3">
           <router-link
             :to="{ name: 'Profile' }"
-            class="nav-link text-dark"
+            class="mode-btn"
             data-toggle="pill"
             >Profile</router-link
           >
