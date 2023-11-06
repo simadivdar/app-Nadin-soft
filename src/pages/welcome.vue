@@ -17,17 +17,17 @@ export default defineComponent({
 
 <template>
   <div class="d-flex flex-column justify-content-center text-center mt-5">
-    <h1>Welcome in App</h1>
+    <h1> {{ $t('Welcome to the app') }}</h1>
     <div class="m-auto col-4 mt-4">
       <input
         class="form-control"
         type="text"
         v-model="userName"
-        placeholder="My name is..."
+        :placeholder="$t('Name')"
         aria-label="default input name"
       />
       <router-link to="/app" @click="setName" class="nav-link text-dark mt-2 border col-2" data-toggle="pill"
-        >Save</router-link
+        >{{ $t('Save') }}</router-link
       >
     </div>
   </div>

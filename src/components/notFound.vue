@@ -7,9 +7,9 @@ export default defineComponent({
 </script>
 
 <template>
-  <h2 class="text-center text-danger mt-5">NOT FOUND</h2>
+  <h2 class="text-center text-danger mt-5">{{ $t('NOT FOUND') }}</h2>
   <div class="text-center fw-bold">
-    Pleas be careful in the link you want..!
+    {{ $t('Please be careful that this link is not yours..!') }} 
   </div>
 </template>
 

@@ -66,7 +66,7 @@ export default defineComponent({
 <template>
   <div class="mt-5 m-auto col-10">
     <ul class="list-group">
-      <li class="list-group-item text-center"><h3>Todo List</h3></li>
+      <li class="list-group-item text-center"><h3>{{ $t('Todo List') }}</h3></li>
       <li v-for="task in tasks" :key="task.id" class="list-group-item">
         <div class="form-check d-flex justify-content-between">
           <div>

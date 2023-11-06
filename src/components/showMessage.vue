@@ -10,12 +10,12 @@ export default defineComponent({
     const timeMessage = computed(() => {
       if (props.time != undefined){
       if (props.time >= 21 || props.time < 3) {
-        return `Good night,${userName.value}`;
+      return "Good night";
       }
       else if (props.time>= 3 && props.time < 11) {
-        return `Good morning,${userName.value}`;
+        return "Good morning";
       } else {
-        return `Good afternoon,${userName.value}`;
+        return "Good afternoon";
       }
     }
     });
@@ -32,12 +32,13 @@ export default defineComponent({
 
     return {
       timeMessage,
+      userName
     };
   },
 });
 </script>
 <template>
   <div class="pt-5">
-    <h3 class="text-center">{{ timeMessage }}</h3>
+    <h3 class="text-center">{{ $t(timeMessage) }},{{ userName }}</h3>
   </div>
 </template>

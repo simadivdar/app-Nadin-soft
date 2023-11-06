@@ -10,7 +10,7 @@ export default defineComponent({
       <ul class="nav flex-column nav-pills">
         <li class="nav-item m-auto mt-3 ">
           <router-link to="/app" class="mode-btn" data-toggle="pill"
-            >Dashboard</router-link
+            >{{ $t('Dashboard') }}</router-link
           >
         </li>
         <li class="nav-item m-auto mt-3">
@@ -18,7 +18,7 @@ export default defineComponent({
             :to="{ name: 'Todo' }"
             class="mode-btn "
             data-toggle="pill"
-            >Todos</router-link
+            >{{ $t('Todos') }}</router-link
           >
         </li>
         <li class="nav-item m-auto mt-3">
@@ -26,7 +26,7 @@ export default defineComponent({
             :to="{ name: 'Weather' }"
             class="mode-btn"
             data-toggle="pill"
-            >Weather</router-link
+            >{{ $t('Weather') }}</router-link
           >
         </li>
         <li class="nav-item m-auto mt-3">
@@ -34,7 +34,7 @@ export default defineComponent({
             :to="{ name: 'Profile' }"
             class="mode-btn"
             data-toggle="pill"
-            >Profile</router-link
+            >{{ $t('Profile') }}</router-link
           >
         </li>
       </ul>

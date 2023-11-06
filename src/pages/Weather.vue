@@ -77,7 +77,7 @@ export default defineComponent({
         type="text"
         v-model="city_name"
         @keyup.enter="getCity"
-        placeholder="Enter city "
+        :placeholder="$t('Enter city')"
         aria-label="default input name"
       />
     </div>

@@ -12,7 +12,7 @@ export default defineComponent({
         class="navbar navbar-expand-sm border w-100 d-flex justify-content-center"
         style="height: 60px"
       >
-        <span class="fs-4 ms-4 ">App Bar</span>
+        <span class="fs-4 ms-4 ">{{ $t('App Bar') }}</span>
       </nav>
     </div>
   </header>
