@@ -15,6 +15,7 @@ export default defineComponent({
       editing: boolean;
     };
     const tasks = ref<Task[]>([]);
+    const changeTask = ref("");
     const addTask = ( newTaskTitle:any) => {
       const newTask: Task = {
         id: tasks.value.length + 1,
@@ -22,6 +23,19 @@ export default defineComponent({
         editing: false,
       };
       tasks.value.push(newTask);
+      saveTasks();
+    };
+    const editStatus = (task:any) => {
+      task.editing=!task.editing;
+    };
+    function editTask(task:any){
+      task.title=changeTask;
+      task.editing=false;
+      saveTasks();
+      changeTask.value=" ";
+    };
+    const removeTask = (taskId: number) => {
+      tasks.value = tasks.value.filter((task) => task.id !== taskId);
       saveTasks();
     };
     const saveTasks = () => {
@@ -41,6 +55,10 @@ export default defineComponent({
     return {
       tasks,
       addTask,
+      removeTask,
+      editTask,
+      changeTask,
+      editStatus
     };
   },
 });
@@ -54,7 +72,16 @@ export default defineComponent({
       <li v-for="item in tasks" :key="item.id">
         <showTodosVue
           :title="item.title"
-          :id="item.id"/>
+          :id="item.id"
+          @delete="removeTask(item.id)" @edit="editStatus(item)"/>
+          <input
+          v-if="item.editing"
+  type="text"
+  id="new-todo-input"
+  name="change-todo"
+  autocomplete="off"
+  v-model.lazy.trim="changeTask"
+  @keypress.enter="editTask(item)" />
       </li>
     </ul>
   </div>
