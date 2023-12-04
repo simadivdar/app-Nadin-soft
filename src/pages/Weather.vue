@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { getCityWeather } from "../services/getWeather.js";
+import { getCityWeather } from "../services/getWeather.ts";
 interface WeatherData {
   current_temperature: number;
   current_weather: string;
