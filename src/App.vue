@@ -1,12 +1,4 @@
-<script lang="ts">
-import { defineComponent} from "vue";
-//This is a comment to start and test GitFlow learning....
-export default defineComponent({
-  name: "App",
-  setup(){
-
-  }
-});
+<script setup lang="ts">
 </script>
 
 <template>

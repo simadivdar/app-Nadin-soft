@@ -1,66 +1,48 @@
-<script lang="ts">
-import { defineComponent, ref, onMounted } from "vue";
+<script setup lang="ts">
+import { ref, onMounted } from "vue";
 import addItem from "../components/addItem.vue";
 import showTodosVue from "../components/showTodos.vue";
-export default defineComponent({
-  name: "Todo",
-  components:{
-    addItem,
-    showTodosVue
-  },
-  setup() {
-    type Task = {
-      id: number;
-      title: string;
-      editing: boolean;
-    };
-    const tasks = ref<Task[]>([]);
-    const changeTask = ref("");
-    const addTask = ( newTaskTitle:any) => {
-      const newTask: Task = {
-        id: tasks.value.length + 1,
-        title: newTaskTitle,
-        editing: false,
-      };
-      tasks.value.push(newTask);
-      saveTasks();
-    };
-    const editStatus = (task:any) => {
-      task.editing=!task.editing;
-    };
-    function editTask(task:any){
-      task.title=changeTask;
-      task.editing=false;
-      saveTasks();
-      changeTask.value=" ";
-    };
-    const removeTask = (taskId: number) => {
-      tasks.value = tasks.value.filter((task) => task.id !== taskId);
-      saveTasks();
-    };
-    const saveTasks = () => {
-      localStorage.setItem("tasks", JSON.stringify(tasks.value));
-    };
-    const loadTasks = () => {
-      const savedTasks = localStorage.getItem("tasks");
-      if (savedTasks) {
-        tasks.value = JSON.parse(savedTasks);
-      }
-    };
+type Task = {
+  id: number;
+  title: string;
+  editing: boolean;
+};
+const tasks = ref<Task[]>([]);
+const changeTask = ref("");
+const addTask = (newTaskTitle: any) => {
+  const newTask: Task = {
+    id: tasks.value.length + 1,
+    title: newTaskTitle,
+    editing: false,
+  };
+  tasks.value.push(newTask);
+  saveTasks();
+};
+const editStatus = (task: any) => {
+  task.editing = !task.editing;
+};
+function editTask(task: any) {
+  task.title = changeTask;
+  task.editing = false;
+  saveTasks();
+  changeTask.value = " ";
+}
+const removeTask = (taskId: number) => {
+  tasks.value = tasks.value.filter((task) => task.id !== taskId);
+  saveTasks();
+};
+const saveTasks = () => {
+  localStorage.setItem("tasks", JSON.stringify(tasks.value));
+};
+const loadTasks = () => {
+  const savedTasks = localStorage.getItem("tasks");
+  if (savedTasks) {
+    tasks.value = JSON.parse(savedTasks);
+  }
+};
 
-    onMounted(() => {
-      loadTasks();
-    });
-
-    return {
-      tasks,
-      addTask,
-      removeTask,
-      editTask,
-      changeTask,
-      editStatus
-    };
-  },
+onMounted(() => {
+  loadTasks();
 });
 </script>
 
