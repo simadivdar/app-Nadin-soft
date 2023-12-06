@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { getCityWeather } from "../services/getWeather.ts";
+import { getCityWeather } from "../services/getWEATHER.ts";
 
 interface WeatherData {
   current_temperature: number;
@@ -9,11 +9,11 @@ interface WeatherData {
 }
 
 const weatherData = ref<WeatherData | null>(null);
-const loading = ref(true);
-const error = ref(false);
-const getInformation = ref(false);
-const city_name = ref("");
-const errorMessage = ref("");
+const loading = ref<boolean>(true);
+const error = ref<boolean>(false);
+const getInformation = ref<boolean>(false);
+const city_name = ref<string>("");
+const errorMessage = ref<string>("");
 
 const getCityWeatherData = async () => {
   try {

@@ -2,7 +2,7 @@
 import { ref, defineEmits } from "vue";
 const emit = defineEmits(["newTaskTitle"]);
 
-const newTaskTitle = ref("");
+const newTaskTitle = ref<string>("");
 
 function addNew() {
   if (newTaskTitle.value === "") {

@@ -6,7 +6,7 @@ const props = defineProps({
   time: Number,
 });
 
-const userName = ref("");
+const userName = ref<string>("");
 const timeMessage = computed(() :string => {
   if (props.time != undefined) {
     if (props.time >= 21 || props.time < 3) {

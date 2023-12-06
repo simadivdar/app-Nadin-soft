@@ -8,7 +8,7 @@ type Task = {
   editing: boolean;
 };
 const tasks = ref<Task[]>([]);
-const changeTask = ref("");
+const changeTask =ref<string>("");
 const addTask = (newTaskTitle: string) => {
   const newTask: Task = {
     id: tasks.value.length + 1,
