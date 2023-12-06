@@ -3,8 +3,8 @@ import { ref, onMounted, onUnmounted } from "vue";
 import moment from "moment";
 import showMessage from "../components/showMessage.vue";
 
-const localTime = ref("");
-const hour = ref();
+const localTime =ref<string>("");
+const hour = ref<number>();
 
 const updateLocalTime = (): any => {
   localTime.value = moment().format("HH:mm");

@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 
-const newUser = ref("");
+const newUser = ref<string>("");
 const addName = () => {
   localStorage.setItem("userName", JSON.stringify(newUser.value));
 };
 
-const theme = ref("");
+const theme =ref<string>("");
 onMounted(() => {
   const localTheme = localStorage.getItem("theme");
   if (localTheme) {

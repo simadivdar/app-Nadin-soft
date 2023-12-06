@@ -3,7 +3,7 @@ import { ref, onMounted } from "vue";
 import Header1 from "../components/headerAbove.vue";
 import Header2 from "../components/leftHeader.vue";
 
-const theme = ref("");
+const theme = ref<string>("");
 
 onMounted(() => {
   const localTheme = localStorage.getItem("theme");
