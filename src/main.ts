@@ -25,8 +25,9 @@ const isAuthenticated = (to: RouteLocationNormalized, from: RouteLocationNormali
   }
   next();
 };
-//............................................................................
+
 const defaultLanguage = localStorage.getItem("locale")  || "En";
+
 console.log(defaultLanguage);
 i18next.init({
   lng: defaultLanguage,
