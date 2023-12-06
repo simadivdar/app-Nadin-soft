@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-const userName = ref("");
+const userName = ref<string>("");
 const setName = () => {
   localStorage.setItem("userName", JSON.stringify(userName.value));
 };
