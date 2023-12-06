@@ -1,33 +1,23 @@
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
 import moment from "moment";
 import showMessage from "../components/showMessage.vue";
-export default defineComponent({
-  components: { showMessage },
-  name: "Dashboard",
-  setup() {
-    const localTime = ref("");
-    const hour = ref();
-    const updateLocalTime = (): any => {
-      localTime.value = moment().format("HH:mm");
-      const timeArray: string[] = localTime.value.split(":");
-      hour.value = parseInt(timeArray[0]);
-    };
 
-    onMounted(() => {
-      setInterval(updateLocalTime, 100);
-    });
+const localTime = ref("");
+const hour = ref();
 
-    onUnmounted(() => {
-      clearInterval(updateLocalTime());
-    });
+const updateLocalTime = (): any => {
+  localTime.value = moment().format("HH:mm");
+  const timeArray: string[] = localTime.value.split(":");
+  hour.value = parseInt(timeArray[0]);
+};
 
-    return {
-      localTime,
-      hour,
-    };
-  },
+onMounted(() => {
+  setInterval(updateLocalTime, 100);
+});
+
+onUnmounted(() => {
+  clearInterval(updateLocalTime());
 });
 </script>
 

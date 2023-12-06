@@ -1,48 +1,40 @@
-<script lang="ts">
-import { defineComponent, ref } from "vue";
+
+<script setup lang="ts">
+import { ref } from "vue";
 import { getCityWeather } from "../services/getWeather.ts";
+
+
 interface WeatherData {
   current_temperature: number;
   current_weather: string;
   weather_units: string;
 }
-export default defineComponent({
-  name: "Weather",
-  setup() {
-    const weatherData = ref<WeatherData | null>(null);
-    const loading = ref(true);
-    const error = ref(false);
-    const getInformation = ref(false);
-    const city_name = ref("");
-    const errorMessage = ref("");
-    const getCityWeatherData = async () => {
-      try {
-        error.value = false;
-        getInformation.value = true;
-        city_name.value =
-          city_name.value.charAt(0).toUpperCase() + city_name.value.slice(1);
-        const cityWeatherData = await getCityWeather(city_name.value);
-        weatherData.value = cityWeatherData.weatherData;
-        loading.value = false;
-      } catch (e) {
-        if (e instanceof Error) {
-          errorMessage.value = e.message;
-        }
-        error.value = true;
-        loading.value = false;
-      }
-    };
-    return {
-      weatherData,
-      loading,
-      city_name,
-      error,
-      errorMessage,
-      getInformation,
-      getCityWeatherData,
-    };
-  },
-});
+
+const weatherData = ref<WeatherData | null>(null);
+const loading = ref(true);
+const error = ref(false);
+const getInformation = ref(false);
+const city_name = ref("");
+const errorMessage = ref("");
+
+const getCityWeatherData = async () => {
+  try {
+    error.value = false;
+    getInformation.value = true;
+    city_name.value =
+      city_name.value.charAt(0).toUpperCase() + city_name.value.slice(1);
+    const cityWeatherData = await getCityWeather(city_name.value);
+    weatherData.value = cityWeatherData.weatherData;
+    loading.value = false;
+  } catch (e) {
+    if (e instanceof Error) {
+      errorMessage.value = e.message;
+    }
+    error.value = true;
+    loading.value = false;
+  }
+};
+
 </script>
 
 <template>

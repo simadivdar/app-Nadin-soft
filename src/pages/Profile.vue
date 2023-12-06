@@ -1,37 +1,30 @@
-<script lang="ts">
-import { defineComponent,ref,onMounted} from "vue";
-export default defineComponent({
-  name: "Profile",
-  setup(){
-    const newUser=ref("")
-    const addName=()=>{
-        localStorage.setItem("userName", JSON.stringify(newUser.value));
-    }
+<script setup lang="ts">
+import { ref, onMounted } from "vue";
+
+const newUser = ref("");
+const addName = () => {
+  localStorage.setItem("userName", JSON.stringify(newUser.value));
+};
+
 const theme = ref("");
 onMounted(() => {
   const localTheme = localStorage.getItem("theme");
-  if(localTheme){
-  document.documentElement.setAttribute("data-theme", localTheme); 
-  theme.value=localTheme;
+  if (localTheme) {
+    document.documentElement.setAttribute("data-theme", localTheme);
+    theme.value = localTheme;
   }
 });
-function toggleTheme(teme:string) {
+
+function toggleTheme(teme: string) {
   theme.value = teme;
-  document.documentElement.setAttribute("data-theme", theme.value); 
-  localStorage.setItem("theme", theme.value); 
+  document.documentElement.setAttribute("data-theme", theme.value);
+  localStorage.setItem("theme", theme.value);
 }
-const addLocale=(locale:string)=>{
-        localStorage.setItem("locale", JSON.stringify(locale));
-        console.log(locale);
-    }
-    return{
-        newUser,
-        addName,
-        toggleTheme,
-        addLocale
-    }
-  }
-});
+
+const addLocale = (locale: string) => {
+  localStorage.setItem("locale", JSON.stringify(locale));
+  console.log(locale);
+};
 </script>
 
 <template>
@@ -44,7 +37,10 @@ const addLocale=(locale:string)=>{
         :placeholder="$t('Name')"
         aria-label="default input name"
       />
-      <p class="fs-6 m-0 fw-semibold"><span class="text-danger">*</span>{{ $t('Enter your name in English.') }}</p>
+      <p class="fs-6 m-0 fw-semibold">
+        <span class="text-danger">*</span
+        >{{ $t("Enter your name in English.") }}
+      </p>
       <div class="dropdown mt-2">
         <button
           class="btn border dropdown-toggle col-12"
@@ -52,12 +48,30 @@ const addLocale=(locale:string)=>{
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          {{ $t('Theme') }}
+          {{ $t("Theme") }}
         </button>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#"  @click="toggleTheme('')">{{ $t('Light') }}</a></li>
-          <li><a class="dropdown-item" href="#" @click="toggleTheme('darkMode')">{{ $t('Dark') }}</a></li>
-          <li><a class="dropdown-item" href="#" @click="toggleTheme('pinkMode')">{{ $t('Pink') }}</a></li>
+          <li>
+            <a class="dropdown-item" href="#" @click="toggleTheme('')">{{
+              $t("Light")
+            }}</a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              href="#"
+              @click="toggleTheme('darkMode')"
+              >{{ $t("Dark") }}</a
+            >
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              href="#"
+              @click="toggleTheme('pinkMode')"
+              >{{ $t("Pink") }}</a
+            >
+          </li>
         </ul>
       </div>
       <div class="dropdown mt-2">
@@ -67,14 +81,24 @@ const addLocale=(locale:string)=>{
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          {{ $t('locale') }}
+          {{ $t("locale") }}
         </button>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#"  @click="addLocale('Fa')" >{{ $t('Fa') }}</a></li>
-          <li ><a class="dropdown-item" @click="addLocale('En')" href="#" >{{ $t('En') }}</a></li>
+          <li>
+            <a class="dropdown-item" href="#" @click="addLocale('Fa')">{{
+              $t("Fa")
+            }}</a>
+          </li>
+          <li>
+            <a class="dropdown-item" @click="addLocale('En')" href="#">{{
+              $t("En")
+            }}</a>
+          </li>
         </ul>
       </div>
-      <button class="btn border mt-2 col-8" @click="addName">{{ $t('Save') }}</button>
+      <button class="btn border mt-2 col-8" @click="addName">
+        {{ $t("Save") }}
+      </button>
     </div>
   </div>
 </template>
