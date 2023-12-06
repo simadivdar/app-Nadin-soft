@@ -1,7 +1,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { getCityWeather } from "../services/getWeather.ts";
+import { getCityWeather } from "../services/getWEATHER.ts";
 
 
 interface WeatherData {
