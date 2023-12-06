@@ -9,7 +9,7 @@ type Task = {
 };
 const tasks = ref<Task[]>([]);
 const changeTask = ref("");
-const addTask = (newTaskTitle: any) => {
+const addTask = (newTaskTitle: string) => {
   const newTask: Task = {
     id: tasks.value.length + 1,
     title: newTaskTitle,
@@ -18,11 +18,11 @@ const addTask = (newTaskTitle: any) => {
   tasks.value.push(newTask);
   saveTasks();
 };
-const editStatus = (task: any) => {
+const editStatus = (task: Task) => {
   task.editing = !task.editing;
 };
-function editTask(task: any) {
-  task.title = changeTask;
+function editTask(task: Task) {
+  task.title = changeTask.value;
   task.editing = false;
   saveTasks();
   changeTask.value = " ";
