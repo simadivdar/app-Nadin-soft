@@ -1,6 +1,8 @@
+
 <script setup lang="ts">
 import { ref } from "vue";
 import { getCityWeather } from "../services/getWeather.ts";
+
 
 interface WeatherData {
   current_temperature: number;
@@ -32,6 +34,7 @@ const getCityWeatherData = async () => {
     loading.value = false;
   }
 };
+
 </script>
 
 <template>
