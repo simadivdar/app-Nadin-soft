@@ -10,6 +10,7 @@ import FA from "./locale/Fa.json";
 import { createRouter, createWebHistory } from "vue-router";
 import { RouteRecordRaw } from "vue-router";
 import { NavigationGuardNext, RouteLocationNormalized } from 'vue-router';
+import todo from "./store/todo";
 //.......................................................................................................
 const isGuest =(to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
   if (localStorage.getItem("userName")) {
@@ -74,6 +75,7 @@ const router = createRouter({
 //.........................................................................................................
 const app = createApp(App);
 app.use(router);
+app.use(todo);
 app.use(I18NextVue,{ i18next });
 app.mount("#app");
 
