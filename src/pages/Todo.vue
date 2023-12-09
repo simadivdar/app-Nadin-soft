@@ -1,69 +1,59 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
+import { useStore } from "vuex";
+import showTodos from "../components/showTodos.vue";
 import addItem from "../components/addItem.vue";
-import showTodosVue from "../components/showTodos.vue";
+const store = useStore();
 type Task = {
   id: number;
   title: string;
   editing: boolean;
 };
-const tasks = ref<Task[]>([]);
-const changeTask =ref<string>("");
+
 const addTask = (newTaskTitle: string) => {
-  const newTask: Task = {
-    id: tasks.value.length + 1,
-    title: newTaskTitle,
-    editing: false,
-  };
-  tasks.value.push(newTask);
-  saveTasks();
+  store.dispatch("addTask", newTaskTitle);
 };
+
 const editStatus = (task: Task) => {
   task.editing = !task.editing;
 };
-function editTask(task: Task) {
-  task.title = changeTask.value;
-  task.editing = false;
-  saveTasks();
-  changeTask.value = " ";
-}
+
+const editTask = (task: Task) => {
+  store.dispatch("editTask", task);
+};
+
 const removeTask = (taskId: number) => {
-  tasks.value = tasks.value.filter((task) => task.id !== taskId);
-  saveTasks();
+  store.dispatch("removeTask", taskId);
 };
-const saveTasks = () => {
-  localStorage.setItem("tasks", JSON.stringify(tasks.value));
-};
-const loadTasks = () => {
-  const savedTasks = localStorage.getItem("tasks");
-  if (savedTasks) {
-    tasks.value = JSON.parse(savedTasks);
-  }
-};
+
+const tasks = ref<Task[]>([]);
 
 onMounted(() => {
-  loadTasks();
+  store.dispatch("loadTasks");
+  tasks.value = store.state.tasks;
 });
 </script>
-
 <template>
   <div class="mt-5 m-auto col-10">
-   <h1>To-Do List</h1>
-   <addItem @new-task-title="addTask($event)"/>
+    <h1>To-Do List</h1>
+    <addItem @new-task-title="addTask" />
     <ul>
-      <li v-for="item in tasks" :key="item.id">
-        <showTodosVue
-          :title="item.title"
-          :id="item.id"
-          @delete="removeTask(item.id)" @edit="editStatus(item)"/>
-          <input
-          v-if="item.editing"
-  type="text"
-  id="new-todo-input"
-  name="change-todo"
-  autocomplete="off"
-  v-model.lazy.trim="changeTask"
-  @keypress.enter="editTask(item)" />
+      <li v-for="task in tasks" :key="task.id">
+        <showTodos
+          :title="task.title"
+          :id="task.id"
+          @delete="removeTask(task.id)"
+          @edit="editStatus(task)"
+        />
+        <input
+          v-if="task.editing"
+          type="text"
+          id="new-todo-input"
+          name="change-todo"
+          autocomplete="off"
+          v-model.lazy.trim="task.title"
+          @keypress.enter="editTask(task)"
+        />
       </li>
     </ul>
   </div>
