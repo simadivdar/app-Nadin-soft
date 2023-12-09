@@ -1,31 +1,48 @@
 <script setup lang="ts">
+import { ref, onMounted } from "vue";
 import { useStore } from "vuex";
-const props = defineProps({
-  title: { required: true, type: String },
-  id: { required: true, type: Number },
-});
 
 const store = useStore();
-
-const editStatus = () => {
-  const task = store.state.tasks.find((task: any) => task.id === props.id);
+type Task = {
+  id: number;
+  title: string;
+  editing: boolean;
+};
+const tasks = ref<Task[]>([]);
+const editStatus = (taskId: number) => {
+  let task = store.state.todo.tasks.find((task: Task) => task.id === taskId);
   if (task) {
     task.editing = !task.editing;
-    store.dispatch("editTask", task);
+    task = store.getters.editTask(task);
+    store.dispatch("setTask", tasks.value);
   }
 };
-
-const removeTask = () => {
-  store.dispatch("removeTask", props.id);
+const removeTask = (taskId: number) => {
+  tasks.value = store.getters.removeTask(taskId);
+  store.dispatch("setTask", tasks.value);
 };
+onMounted(() => {
+  store.dispatch("loadTasks");
+  tasks.value = store.state.todo.tasks;
+});
 </script>
 
 <template>
-  <div class="d-flex justify-content-between">
-    <div>{{ title }}</div>
-    <div>
-      <button class="btn" @click="editStatus">Edit</button>
-      <button class="btn" @click="removeTask">Delete</button>
-    </div>
+  <div class="">
+    <ul v-for="task in tasks" :key="task.id">
+      <li>{{ task.title }}</li>
+      <input
+        v-if="task.editing"
+        type="text"
+        id="new-todo-input"
+        name="change-todo"
+        autocomplete="off"
+        v-model.lazy.trim="task.title"
+      />
+      <div>
+        <button class="btn" @click="editStatus(task.id)">Edit</button>
+        <button class="btn" @click="removeTask(task.id)">Delete</button>
+      </div>
+    </ul>
   </div>
 </template>
