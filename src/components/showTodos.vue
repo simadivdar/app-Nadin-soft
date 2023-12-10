@@ -1,35 +1,26 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { onMounted } from "vue";
 import { useStore } from "vuex";
 
 const store = useStore();
-type Task = {
-  id: number;
-  title: string;
-  editing: boolean;
-};
-const tasks = ref<Task[]>([]);
 const editStatus = (taskId: number) => {
-  let task = store.state.todo.tasks.find((task: Task) => task.id === taskId);
+  const task = store.state.todo.tasks.find((task: any) => task.id === taskId);
   if (task) {
     task.editing = !task.editing;
-    task = store.getters.editTask(task);
-    store.dispatch("setTask", tasks.value);
+    store.dispatch("editTask", task);
   }
 };
 const removeTask = (taskId: number) => {
-  tasks.value = store.getters.removeTask(taskId);
-  store.dispatch("setTask", tasks.value);
+  store.dispatch("removeTask", taskId);
 };
 onMounted(() => {
   store.dispatch("loadTasks");
-  tasks.value = store.state.todo.tasks;
 });
 </script>
 
 <template>
   <div class="">
-    <ul v-for="task in tasks" :key="task.id">
+    <ul v-for="task in store.state.todo.tasks" :key="task.id">
       <li>{{ task.title }}</li>
       <input
         v-if="task.editing"
