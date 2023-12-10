@@ -15,7 +15,7 @@ const name = computed((): string => {
         class="form-control text-center"
         type="text"
         v-model.lazy.trim="city_name"
-        @keyup.enter="show = !show"
+        @keyup.enter="$emit('name',city_name),show =!show"
         :placeholder="$t('Enter city')"
         aria-label="default input name"
       />
