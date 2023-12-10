@@ -1,28 +1,24 @@
-import { createStore } from "vuex";
-
+import { Module } from "vuex";
 type Task = {
   id: number;
   title: string;
   editing: boolean;
 };
-
 interface State {
   tasks: Task[];
 }
-
 const saveTasks = (tasks: Task[]) => {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 };
-
-export default createStore<State>({
+const todoModule: Module<State, any> = {
   state: {
     tasks: [],
   },
   mutations: {
-    SET_TASKS(state, tasks: Task[]) {
+    SET_TASKS(state: State, tasks: Task[]) {
       state.tasks = tasks;
     },
-    ADD_TASK(state, newTask: Task) {
+    ADD_TASK(state: State, newTask: Task) {
       state.tasks.push(newTask);
     },
     EDIT_TASK(state, editedTask: Task) {
@@ -38,14 +34,14 @@ export default createStore<State>({
     },
   },
   actions: {
-    loadTasks({ commit }) {
+    loadTasks({ commit }: any) {
       const savedTasks = localStorage.getItem("tasks");
       if (savedTasks) {
         const tasks = JSON.parse(savedTasks);
         commit("SET_TASKS", tasks);
       }
     },
-    addTask({ commit, state }, newTaskTitle: string) {
+    addTask({ commit, state }: any, newTaskTitle: string) {
       const newTask: Task = {
         id: state.tasks.length + 1,
         title: newTaskTitle,
@@ -63,4 +59,6 @@ export default createStore<State>({
       saveTasks(state.tasks);
     },
   },
-});
+  getters: {},
+};
+export default todoModule;

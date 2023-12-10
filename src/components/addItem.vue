@@ -1,17 +1,14 @@
 <script setup lang="ts">
-import { useStore } from "vuex";
+import store from "../store/store";
 import { ref } from "vue";
-const emit = defineEmits(["newTaskTitle"]);
 
 const newTaskTitle = ref<string>("");
 
-const store = useStore();
 
 function addNew() {
   if (newTaskTitle.value === "") {
     return;
   }
-  console.log("Label value: ", newTaskTitle.value);
   store.dispatch("addTask", newTaskTitle.value);
   newTaskTitle.value = "";
 }
